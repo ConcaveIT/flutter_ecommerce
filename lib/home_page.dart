@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.white,
         elevation: 0.0,
         leading: const Icon(
-          FontAwesomeIcons.bars,
+          FontAwesomeIcons.thLarge,
           color: Colors.blue,
           size: 18,
         ),
@@ -161,9 +161,7 @@ class _HomePageState extends State<HomePage> {
               ),
               Text(
                 'Chromebook',
-                  style: TextStyle(
-                    fontSize: 12
-                  ),
+                style: TextStyle(fontSize: 12),
               )
             ],
           ),
@@ -173,16 +171,122 @@ class _HomePageState extends State<HomePage> {
   }
 
   _productTabWidget() {
-    return const Padding(
-      padding: EdgeInsets.all(8.0),
-      child: TabBar(
-        indicatorColor: Colors.white,
-        tabs: [
-          Tab(text: 'DOGS', icon: Icon(Icons.favorite)),
-          Tab(text: 'CATS', icon: Icon(Icons.music_note)),
-          Tab(text: 'BIRDS', icon: Icon(Icons.search)),
-        ],
-      ),
-    );
+    return DefaultTabController(
+        length: 3, // length of tabs
+        initialIndex: 0,
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Container(
+                child: const TabBar(
+                  labelColor: Colors.green,
+                  unselectedLabelColor: Colors.black,
+                  tabs: [
+                    Tab(text: 'Popular'),
+                    Tab(text: 'Discount'),
+                    Tab(text: 'Exclusive')
+                  ],
+                ),
+              ),
+              Container(
+                  height: 400, //height of TabBarView
+                  decoration: const BoxDecoration(
+                      border: Border(
+                          top: BorderSide(color: Colors.grey, width: 0.5))),
+                  child: TabBarView(children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GridView.count(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 5.0,
+                        childAspectRatio: 0.70,
+                        children: List.generate(8, (index) {
+                          return  Card(
+                            elevation: 0.0,
+                            child: Stack(
+                              children: [
+                                Column(
+                                  children: [
+                                    ClipRRect(
+
+                                      child: Container(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Center(
+                                            child: Image.asset(
+                                              'assets/images/headphone.png',
+                                              height: 150,
+                                              width: 150,
+                                            ),
+                                          ),
+                                        ),
+                                        color: Colors.blue.shade50,
+                                      ),
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                    const Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: Text('Noise Cancelling Headphone'),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(vertical: 2.0,horizontal: 8.0),
+                                      child: Row(
+                                        children: const [
+                                          Icon(
+                                            FontAwesomeIcons.dollarSign,
+                                            size: 13,
+                                          ),
+                                        Text(
+                                            '249.95',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold
+                                          ),
+                                        )
+
+                                        ],
+                                      ),
+                                    )],
+                                ),
+                                Positioned.fill(
+                                  child: Align(
+                                    alignment: Alignment.topRight,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(top: 10),
+                                      child: ClipRRect(
+                                        child: Container(
+                                          child: const Padding(
+                                            padding: EdgeInsets.all(3.0),
+                                            child: Text('50% off'),
+                                          ),
+                                          color: Colors.amber,
+                                        ),
+                                        borderRadius: const BorderRadius.only(
+                                          bottomLeft: Radius.circular(10.0),
+                                          topLeft: Radius.circular(10.0),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  right: 0,
+
+                                )
+                              ],
+                            ),
+                          );
+                        }),
+                      ),
+                    ),
+                    const Center(
+                      child: Text('Discounted Products',
+                          style: TextStyle(
+                              fontSize: 22, fontWeight: FontWeight.bold)),
+                    ),
+                    const Center(
+                      child: Text('Exclusive Products',
+                          style: TextStyle(
+                              fontSize: 22, fontWeight: FontWeight.bold)),
+                    ),
+                  ]))
+            ]));
   }
 }
