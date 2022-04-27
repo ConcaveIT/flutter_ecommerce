@@ -1,3 +1,4 @@
+import 'package:ecom/webv.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -57,6 +58,7 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: Column(
@@ -64,6 +66,8 @@ class _HomePageState extends State<HomePage> {
               _searchWidget(),
               _subHeadWidget(),
               _categoryWidget(),
+
+              WebViewExample(),
               _productTabWidget(),
             ],
           ),
@@ -197,6 +201,9 @@ class _HomePageState extends State<HomePage> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: GridView.count(
+                        primary: false,
+                        shrinkWrap: false,
+                        physics: NeverScrollableScrollPhysics(),
                         crossAxisCount: 2,
                         crossAxisSpacing: 5.0,
                         childAspectRatio: 0.70,
